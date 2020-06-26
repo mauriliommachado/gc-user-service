@@ -11,6 +11,7 @@ func main() {
 	log.Println("Initialing application")
 	// Initialize server
 	app := models.App{}
+	app.ServiceName = "users"
 	log.Println("Loading configurations")
 	services.InitServer(&app)
 }

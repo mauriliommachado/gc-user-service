@@ -13,7 +13,7 @@ import (
 	"github.com/mauriliommachado/go-commerce/user-service/models"
 )
 
-func protectMiddleware(next http.HandlerFunc) httprouter.Handle {
+func protectMiddleware(next httprouter.Handle) httprouter.Handle {
 	return httprouter.Handle(func(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 		authorizationHeader := req.Header.Get("Authorization")
 		if authorizationHeader != "" {
@@ -26,7 +26,7 @@ func protectMiddleware(next http.HandlerFunc) httprouter.Handle {
 					return
 				}
 				if token.Valid {
-					next(w, req)
+					next(w, req, ps)
 					return
 				}
 				w.WriteHeader(http.StatusUnauthorized)
